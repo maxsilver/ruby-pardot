@@ -1,8 +1,15 @@
+== Why the fork?
+
+This repository is a fork of pardot/ruby-pardot at https://github.com/pardot/ruby-pardot
+
+It includes changes to support list_management (including the open PR at https://github.com/pardot/ruby-pardot/pull/42), but otherwise tries to stay up to date with the original repo.
+
+
 == Install
 
 Add the following to your Gemfile
 
-  gem "ruby-pardot"
+  gem "ruby-pardot", git: "git://github.com/maxsilver/ruby-pardot.git"
 
 == Usage
 
