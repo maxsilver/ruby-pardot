@@ -31,11 +31,13 @@ Usage of the username, password, and API key authentication is deprecated and wi
 
 The available objects are:
 
-* custom_fields 
+* campaigns
+* custom_fields
 * emails
 * lists
 * opportunities
 * prospects
+* prospect_accounts
 * users
 * visitor_activities
 * visitors
