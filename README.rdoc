@@ -31,6 +31,7 @@ Usage of the username, password, and API key authentication is deprecated and wi
 
 The available objects are:
 
+* accounts
 * campaigns
 * custom_fields
 * emails
