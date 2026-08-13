@@ -24,8 +24,8 @@ module Pardot
           get "/do/read/id/#{id}", params
         end
 
-        def update(id, _params = {})
-          post "/do/update/#{id}"
+        def update(id, params = {})
+          post "/do/update/#{id}", params
         end
 
         protected
