@@ -11,6 +11,7 @@ module Pardot
     include Objects::Campaigns
     include Objects::CustomFields
     include Objects::Emails
+    include Objects::Forms
     include Objects::Lists
     include Objects::ListMemberships
     include Objects::Opportunities

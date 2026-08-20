@@ -21,15 +21,11 @@ module Pardot
         end
 
         def read_by_id(id, params = {})
-          post "/do/read/id/#{id}", params
+          get "/do/read/id/#{id}", params
         end
 
         def update_by_id(id, params = {})
           post "/do/update/id/#{id}", params
-        end
-
-        def delete_by_id(id, params = {})
-          post "/do/delete/id/#{id}", params
         end
 
         protected

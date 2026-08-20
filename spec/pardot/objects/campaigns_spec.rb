@@ -63,7 +63,7 @@ describe Pardot::Objects::Campaigns do
         end
 
         it 'should return the campaign' do
-          fake_post '/api/campaign/version/3/do/read/id/12345?format=simple', sample_results
+          fake_get '/api/campaign/version/3/do/read/id/12345?format=simple', sample_results
 
           expect(client.campaigns.read_by_id(12_345)).to eq({ 'id' => '12345', 'name' => 'Spring Sale' })
           assert_authorization_header auth_manager
@@ -85,24 +85,6 @@ describe Pardot::Objects::Campaigns do
 
           expect(client.campaigns.update_by_id(12_345, name: 'Summer Sale')).to eq({ 'id' => '12345',
                                                                                     'name' => 'Summer Sale' })
-          assert_authorization_header auth_manager
-        end
-      end
-
-      describe 'delete_by_id' do
-        def sample_results
-          %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
-            <campaign>
-              <id>12345</id>
-              <name>Spring Sale</name>
-            </campaign>
-          </rsp>)
-        end
-
-        it 'should return the campaign' do
-          fake_post '/api/campaign/version/3/do/delete/id/12345?format=simple', sample_results
-
-          expect(client.campaigns.delete_by_id(12_345)).to eq({ 'id' => '12345', 'name' => 'Spring Sale' })
           assert_authorization_header auth_manager
         end
       end
