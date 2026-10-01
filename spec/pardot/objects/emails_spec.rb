@@ -21,6 +21,20 @@ describe Pardot::Objects::Emails do
         assert_authorization_header auth_manager
       end
 
+      it 'should request stats for an email' do
+        sample_stats_response = %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
+          <stats>
+            <sent>100</sent>
+            <opens>42</opens>
+            <unique_opens>37</unique_opens>
+            <total_clicks>9</total_clicks>
+          </stats>
+        </rsp>)
+        fake_get '/api/email/version/3/do/stats/id/12?format=simple', sample_stats_response
+        expect(client.emails.stats_by_id(12)).to eq({ 'sent' => '100', 'opens' => '42', 'unique_opens' => '37', 'total_clicks' => '9' })
+        assert_authorization_header auth_manager
+      end
+
       it 'should send to a prospect' do
         fake_post '/api/email/version/3/do/send/prospect_id/42?campaign_id=765&email_template_id=86&format=simple', sample_response
         expect(client.emails.send_to_prospect(42, campaign_id: 765, email_template_id: 86)).to eq({ 'name' => 'My Email' })

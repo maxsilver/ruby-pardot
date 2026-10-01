@@ -14,6 +14,10 @@ module Pardot
           get "/do/read/id/#{id}"
         end
 
+        def stats_by_id(id)
+          get "/do/stats/id/#{id}", {}, 'stats'
+        end
+
         def send_to_prospect(prospect_id, params)
           post "/do/send/prospect_id/#{prospect_id}", params
         end
