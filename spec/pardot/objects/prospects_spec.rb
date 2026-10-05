@@ -7,7 +7,7 @@ describe Pardot::Objects::Prospects do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -25,19 +25,19 @@ describe Pardot::Objects::Prospects do
           </rsp>)
         end
 
-        it 'should take in some arguments' do
-          fake_get '/api/prospect/version/3/do/query?assigned=true&format=simple', sample_results
+        it "should take in some arguments" do
+          fake_get "/api/prospect/version/3/do/query?assigned=true&format=simple", sample_results
 
-          expect(client.prospects.query(assigned: true)).to eq({ 'total_results' => 2,
-                                                                 'prospect' => [
-                                                                   { 'last_name' => 'Smith', 'first_name' => 'Jim' },
-                                                                   { 'last_name' => 'Green', 'first_name' => 'Sue' }
-                                                                 ] })
+          expect(client.prospects.query(assigned: true)).to eq({"total_results" => 2,
+                                                                 "prospect" => [
+                                                                   {"last_name" => "Smith", "first_name" => "Jim"},
+                                                                   {"last_name" => "Green", "first_name" => "Sue"}
+                                                                 ]})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'create' do
+      describe "create" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -48,12 +48,12 @@ describe Pardot::Objects::Prospects do
           </rsp>)
         end
 
-        it 'should return the prospect' do
-          fake_post '/api/prospect/version/3/do/create/email/user%40test.com?first_name=Jim&format=simple',
-                    sample_results
+        it "should return the prospect" do
+          fake_post "/api/prospect/version/3/do/create/email/user%40test.com?first_name=Jim&format=simple",
+            sample_results
 
-          expect(client.prospects.create('user@test.com',
-                                         first_name: 'Jim')).to eq({ 'last_name' => 'Smith', 'first_name' => 'Jim' })
+          expect(client.prospects.create("user@test.com",
+            first_name: "Jim")).to eq({"last_name" => "Smith", "first_name" => "Jim"})
           assert_authorization_header auth_manager
         end
       end

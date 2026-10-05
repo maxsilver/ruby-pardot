@@ -7,7 +7,7 @@ describe Pardot::Objects::Campaigns do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <result>
@@ -22,19 +22,19 @@ describe Pardot::Objects::Campaigns do
           </rsp>)
         end
 
-        it 'should take in some arguments' do
-          fake_get '/api/campaign/version/3/do/query?id_greater_than=200&format=simple', sample_results
+        it "should take in some arguments" do
+          fake_get "/api/campaign/version/3/do/query?id_greater_than=200&format=simple", sample_results
 
-          expect(client.campaigns.query(id_greater_than: 200)).to eq({ 'total_results' => 2,
-                                                                      'campaign' => [
-                                                                        { 'name' => 'Asdf Campaign' },
-                                                                        { 'name' => 'Qwerty Campaign' }
-                                                                      ] })
+          expect(client.campaigns.query(id_greater_than: 200)).to eq({"total_results" => 2,
+                                                                       "campaign" => [
+                                                                         {"name" => "Asdf Campaign"},
+                                                                         {"name" => "Qwerty Campaign"}
+                                                                       ]})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'create' do
+      describe "create" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <campaign>
@@ -44,15 +44,15 @@ describe Pardot::Objects::Campaigns do
           </rsp>)
         end
 
-        it 'should return the campaign' do
-          fake_post '/api/campaign/version/3/do/create?name=Spring%20Sale&format=simple', sample_results
+        it "should return the campaign" do
+          fake_post "/api/campaign/version/3/do/create?name=Spring%20Sale&format=simple", sample_results
 
-          expect(client.campaigns.create(name: 'Spring Sale')).to eq({ 'id' => '12345', 'name' => 'Spring Sale' })
+          expect(client.campaigns.create(name: "Spring Sale")).to eq({"id" => "12345", "name" => "Spring Sale"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'read_by_id' do
+      describe "read_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <campaign>
@@ -62,15 +62,15 @@ describe Pardot::Objects::Campaigns do
           </rsp>)
         end
 
-        it 'should return the campaign' do
-          fake_get '/api/campaign/version/3/do/read/id/12345?format=simple', sample_results
+        it "should return the campaign" do
+          fake_get "/api/campaign/version/3/do/read/id/12345?format=simple", sample_results
 
-          expect(client.campaigns.read_by_id(12_345)).to eq({ 'id' => '12345', 'name' => 'Spring Sale' })
+          expect(client.campaigns.read_by_id(12_345)).to eq({"id" => "12345", "name" => "Spring Sale"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'update_by_id' do
+      describe "update_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <campaign>
@@ -80,11 +80,11 @@ describe Pardot::Objects::Campaigns do
           </rsp>)
         end
 
-        it 'should return the campaign' do
-          fake_post '/api/campaign/version/3/do/update/id/12345?name=Summer%20Sale&format=simple', sample_results
+        it "should return the campaign" do
+          fake_post "/api/campaign/version/3/do/update/id/12345?name=Summer%20Sale&format=simple", sample_results
 
-          expect(client.campaigns.update_by_id(12_345, name: 'Summer Sale')).to eq({ 'id' => '12345',
-                                                                                    'name' => 'Summer Sale' })
+          expect(client.campaigns.update_by_id(12_345, name: "Summer Sale")).to eq({"id" => "12345",
+                                                                                     "name" => "Summer Sale"})
           assert_authorization_header auth_manager
         end
       end

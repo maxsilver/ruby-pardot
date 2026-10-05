@@ -7,7 +7,7 @@ describe Pardot::Objects::Accounts do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <result>
@@ -22,19 +22,19 @@ describe Pardot::Objects::Accounts do
           </rsp>)
         end
 
-        it 'should take in some arguments' do
-          fake_get '/api/account/version/3/do/query?id_greater_than=200&format=simple', sample_results
+        it "should take in some arguments" do
+          fake_get "/api/account/version/3/do/query?id_greater_than=200&format=simple", sample_results
 
-          expect(client.accounts.query(id_greater_than: 200)).to eq({ 'total_results' => 2,
-                                                                      'account' => [
-                                                                        { 'name' => 'Acme Corp' },
-                                                                        { 'name' => 'Globex' }
-                                                                      ] })
+          expect(client.accounts.query(id_greater_than: 200)).to eq({"total_results" => 2,
+                                                                      "account" => [
+                                                                        {"name" => "Acme Corp"},
+                                                                        {"name" => "Globex"}
+                                                                      ]})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'create' do
+      describe "create" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <account>
@@ -44,15 +44,15 @@ describe Pardot::Objects::Accounts do
           </rsp>)
         end
 
-        it 'should return the account' do
-          fake_post '/api/account/version/3/do/create?name=Acme%20Corp&format=simple', sample_results
+        it "should return the account" do
+          fake_post "/api/account/version/3/do/create?name=Acme%20Corp&format=simple", sample_results
 
-          expect(client.accounts.create(name: 'Acme Corp')).to eq({ 'id' => '12345', 'name' => 'Acme Corp' })
+          expect(client.accounts.create(name: "Acme Corp")).to eq({"id" => "12345", "name" => "Acme Corp"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'read_by_id' do
+      describe "read_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <account>
@@ -62,15 +62,15 @@ describe Pardot::Objects::Accounts do
           </rsp>)
         end
 
-        it 'should return the account' do
-          fake_post '/api/account/version/3/do/read/id/12345?format=simple', sample_results
+        it "should return the account" do
+          fake_post "/api/account/version/3/do/read/id/12345?format=simple", sample_results
 
-          expect(client.accounts.read_by_id(12_345)).to eq({ 'id' => '12345', 'name' => 'Acme Corp' })
+          expect(client.accounts.read_by_id(12_345)).to eq({"id" => "12345", "name" => "Acme Corp"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'update_by_id' do
+      describe "update_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <account>
@@ -80,16 +80,16 @@ describe Pardot::Objects::Accounts do
           </rsp>)
         end
 
-        it 'should return the account' do
-          fake_post '/api/account/version/3/do/update/id/12345?name=Acme%20Worldwide&format=simple', sample_results
+        it "should return the account" do
+          fake_post "/api/account/version/3/do/update/id/12345?name=Acme%20Worldwide&format=simple", sample_results
 
-          expect(client.accounts.update_by_id(12_345, name: 'Acme Worldwide')).to eq({ 'id' => '12345',
-                                                                                      'name' => 'Acme Worldwide' })
+          expect(client.accounts.update_by_id(12_345, name: "Acme Worldwide")).to eq({"id" => "12345",
+                                                                                       "name" => "Acme Worldwide"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'delete_by_id' do
+      describe "delete_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <account>
@@ -99,10 +99,10 @@ describe Pardot::Objects::Accounts do
           </rsp>)
         end
 
-        it 'should return the account' do
-          fake_post '/api/account/version/3/do/delete/id/12345?format=simple', sample_results
+        it "should return the account" do
+          fake_post "/api/account/version/3/do/delete/id/12345?format=simple", sample_results
 
-          expect(client.accounts.delete_by_id(12_345)).to eq({ 'id' => '12345', 'name' => 'Acme Corp' })
+          expect(client.accounts.delete_by_id(12_345)).to eq({"id" => "12345", "name" => "Acme Corp"})
           assert_authorization_header auth_manager
         end
       end

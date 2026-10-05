@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'fakeweb'
+require "fakeweb"
 FakeWeb.allow_net_connect = false
 
 def fake_post(path, response)
@@ -17,7 +17,7 @@ end
 
 def assert_authorization_header(auth_manager)
   expect(FakeWeb.last_request[:authorization]).to eq(auth_manager.expected_authorization_header)
-  if auth_manager.has_business_unit_id_header?
-    expect(FakeWeb.last_request['Business-Unit-Id']).to eq(auth_manager.expected_business_unit_id_header)
-  end
+  return unless auth_manager.has_business_unit_id_header?
+
+  expect(FakeWeb.last_request["Business-Unit-Id"]).to eq(auth_manager.expected_business_unit_id_header)
 end

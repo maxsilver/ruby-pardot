@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pardot
   module Objects
     module Emails
@@ -15,7 +17,7 @@ module Pardot
         end
 
         def stats_by_id(id)
-          get "/do/stats/id/#{id}", {}, 'stats'
+          get "/do/stats/id/#{id}", {}, "stats"
         end
 
         def send_to_prospect(prospect_id, params)
@@ -23,18 +25,18 @@ module Pardot
         end
 
         def send_to_list(params)
-          post '/do/send', params
+          post "/do/send", params
         end
 
         protected
 
-        def get(path, params = {}, result = 'email')
-          response = @client.get 'email', path, params
+        def get(path, params = {}, result = "email")
+          response = @client.get "email", path, params
           result ? response[result] : response
         end
 
-        def post(path, params = {}, result = 'email')
-          response = @client.post 'email', path, params
+        def post(path, params = {}, result = "email")
+          response = @client.post "email", path, params
           result ? response[result] : response
         end
       end

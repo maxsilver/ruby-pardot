@@ -1,25 +1,27 @@
-require 'httparty'
-require 'crack'
-require 'cgi'
+# frozen_string_literal: true
 
-require 'pardot/http'
-require 'pardot/error'
-require 'pardot/authentication'
+require "httparty"
+require "crack"
+require "cgi"
 
-require 'pardot/objects/accounts'
-require 'pardot/objects/campaigns'
-require 'pardot/objects/custom_fields'
-require 'pardot/objects/emails'
-require 'pardot/objects/forms'
-require 'pardot/objects/lists'
-require 'pardot/objects/list_memberships'
-require 'pardot/objects/opportunities'
-require 'pardot/objects/prospects'
-require 'pardot/objects/prospect_accounts'
-require 'pardot/objects/users'
-require 'pardot/objects/visitors'
-require 'pardot/objects/visitor_activity_types'
-require 'pardot/objects/visitor_activities'
-require 'pardot/objects/visits'
+require "pardot/http"
+require "pardot/error"
+require "pardot/authentication"
 
-require 'pardot/client'
+require "pardot/objects/accounts"
+require "pardot/objects/campaigns"
+require "pardot/objects/custom_fields"
+require "pardot/objects/emails"
+require "pardot/objects/forms"
+require "pardot/objects/lists"
+require "pardot/objects/list_memberships"
+require "pardot/objects/opportunities"
+require "pardot/objects/prospects"
+require "pardot/objects/prospect_accounts"
+require "pardot/objects/users"
+require "pardot/objects/visitors"
+require "pardot/objects/visitor_activity_types"
+require "pardot/objects/visitor_activities"
+require "pardot/objects/visits"
+
+require "pardot/client"

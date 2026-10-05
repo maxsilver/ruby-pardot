@@ -7,7 +7,7 @@ describe Pardot::Objects::Opportunities do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <result>
@@ -24,14 +24,14 @@ describe Pardot::Objects::Opportunities do
           </rsp>)
         end
 
-        it 'should take in some arguments' do
-          fake_get '/api/opportunity/version/3/do/query?id_greater_than=200&format=simple', sample_results
+        it "should take in some arguments" do
+          fake_get "/api/opportunity/version/3/do/query?id_greater_than=200&format=simple", sample_results
 
           expected = {
-            'total_results' => 2,
-            'opportunity' => [
-              { 'type' => 'Great', 'name' => 'Jim' },
-              { 'type' => 'Good', 'name' => 'Sue' }
+            "total_results" => 2,
+            "opportunity" => [
+              {"type" => "Great", "name" => "Jim"},
+              {"type" => "Good", "name" => "Sue"}
             ]
           }
           expect(client.opportunities.query(id_greater_than: 200)).to eq(expected)
@@ -39,7 +39,7 @@ describe Pardot::Objects::Opportunities do
         end
       end
 
-      describe 'create_by_email' do
+      describe "create_by_email" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -50,10 +50,10 @@ describe Pardot::Objects::Opportunities do
           </rsp>)
         end
 
-        it 'should return the prospect' do
-          fake_post '/api/opportunity/version/3/do/create/prospect_email/user@test.com?type=Good&format=simple&name=Jim', sample_results
+        it "should return the prospect" do
+          fake_post "/api/opportunity/version/3/do/create/prospect_email/user@test.com?type=Good&format=simple&name=Jim", sample_results
 
-          expect(client.opportunities.create_by_email('user@test.com', name: 'Jim', type: 'Good')).to eq({ 'name' => 'Jim', 'type' => 'Good' })
+          expect(client.opportunities.create_by_email("user@test.com", name: "Jim", type: "Good")).to eq({"name" => "Jim", "type" => "Good"})
 
           assert_authorization_header auth_manager
         end

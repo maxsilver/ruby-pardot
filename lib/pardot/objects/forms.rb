@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pardot
   module Objects
     module Forms
@@ -11,8 +13,8 @@ module Pardot
         end
 
         def query(params)
-          result = get '/do/query', params, 'result'
-          result['total_results'] = result['total_results'].to_i if result['total_results']
+          result = get "/do/query", params, "result"
+          result["total_results"] = result["total_results"].to_i if result["total_results"]
           result
         end
 
@@ -22,8 +24,8 @@ module Pardot
 
         protected
 
-        def get(path, params = {}, result = 'form')
-          response = @client.get 'form', path, params
+        def get(path, params = {}, result = "form")
+          response = @client.get "form", path, params
           result ? response[result] : response
         end
       end

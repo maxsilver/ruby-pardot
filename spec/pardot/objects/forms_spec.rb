@@ -7,7 +7,7 @@ describe Pardot::Objects::Forms do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <result>
@@ -22,19 +22,19 @@ describe Pardot::Objects::Forms do
           </rsp>)
         end
 
-        it 'should take in some arguments' do
-          fake_get '/api/form/version/3/do/query?id_greater_than=200&format=simple', sample_results
+        it "should take in some arguments" do
+          fake_get "/api/form/version/3/do/query?id_greater_than=200&format=simple", sample_results
 
-          expect(client.forms.query(id_greater_than: 200)).to eq({ 'total_results' => 2,
-                                                                    'form' => [
-                                                                      { 'name' => 'Demo Request' },
-                                                                      { 'name' => 'Contact Us' }
-                                                                    ] })
+          expect(client.forms.query(id_greater_than: 200)).to eq({"total_results" => 2,
+                                                                   "form" => [
+                                                                     {"name" => "Demo Request"},
+                                                                     {"name" => "Contact Us"}
+                                                                   ]})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'read_by_id' do
+      describe "read_by_id" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
             <form>
@@ -44,10 +44,10 @@ describe Pardot::Objects::Forms do
           </rsp>)
         end
 
-        it 'should return the form' do
-          fake_get '/api/form/version/3/do/read/id/38756?format=simple', sample_results
+        it "should return the form" do
+          fake_get "/api/form/version/3/do/read/id/38756?format=simple", sample_results
 
-          expect(client.forms.read_by_id(38_756)).to eq({ 'id' => '38756', 'name' => 'Demo Request' })
+          expect(client.forms.read_by_id(38_756)).to eq({"id" => "38756", "name" => "Demo Request"})
           assert_authorization_header auth_manager
         end
       end

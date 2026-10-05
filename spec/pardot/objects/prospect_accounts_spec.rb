@@ -7,7 +7,7 @@ describe Pardot::Objects::ProspectAccounts do
     context auth_manager.test_name_suffix do
       let(:client) { auth_manager.create_client }
 
-      describe 'query' do
+      describe "query" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -23,19 +23,19 @@ describe Pardot::Objects::ProspectAccounts do
           </rsp>)
         end
 
-        it 'should take in some arguments and respond with valid items' do
-          fake_get '/api/prospectAccount/version/3/do/query?assigned=true&format=simple', sample_results
+        it "should take in some arguments and respond with valid items" do
+          fake_get "/api/prospectAccount/version/3/do/query?assigned=true&format=simple", sample_results
 
-          expect(client.prospect_accounts.query(assigned: true)).to eq({ 'total_results' => 2,
-                                                                         'prospectAccount' => [
-                                                                           { 'name' => 'Spaceships R Us' },
-                                                                           { 'name' => 'Monsters Inc' }
-                                                                         ] })
+          expect(client.prospect_accounts.query(assigned: true)).to eq({"total_results" => 2,
+                                                                         "prospectAccount" => [
+                                                                           {"name" => "Spaceships R Us"},
+                                                                           {"name" => "Monsters Inc"}
+                                                                         ]})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'read' do
+      describe "read" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -46,16 +46,16 @@ describe Pardot::Objects::ProspectAccounts do
             </rsp>)
         end
 
-        it 'should return a valid account' do
-          fake_post '/api/prospectAccount/version/3/do/read/id/1234?assigned=true&format=simple', sample_results
+        it "should return a valid account" do
+          fake_post "/api/prospectAccount/version/3/do/read/id/1234?assigned=true&format=simple", sample_results
 
-          expect(client.prospect_accounts.read('1234',
-                                               assigned: true)).to eq({ 'id' => '1234', 'name' => 'SupaDupaPanda' })
+          expect(client.prospect_accounts.read("1234",
+            assigned: true)).to eq({"id" => "1234", "name" => "SupaDupaPanda"})
           assert_authorization_header auth_manager
         end
       end
 
-      describe 'create' do
+      describe "create" do
         def sample_results
           %(<?xml version="1.0" encoding="UTF-8"?>
           <rsp stat="ok" version="1.0">
@@ -65,10 +65,10 @@ describe Pardot::Objects::ProspectAccounts do
           </rsp>)
         end
 
-        it 'should return the prospect account' do
-          fake_post '/api/prospectAccount/version/3/do/create?format=simple&name=SuperPanda', sample_results
+        it "should return the prospect account" do
+          fake_post "/api/prospectAccount/version/3/do/create?format=simple&name=SuperPanda", sample_results
 
-          expect(client.prospect_accounts.create(name: 'SuperPanda')).to eq({ 'name' => 'SuperPanda' })
+          expect(client.prospect_accounts.create(name: "SuperPanda")).to eq({"name" => "SuperPanda"})
           assert_authorization_header auth_manager
         end
       end

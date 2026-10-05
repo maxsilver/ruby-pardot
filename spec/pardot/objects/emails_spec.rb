@@ -15,13 +15,13 @@ describe Pardot::Objects::Emails do
         </rsp>)
       end
 
-      it 'should take in the email ID' do
-        fake_get '/api/email/version/3/do/read/id/12?format=simple', sample_response
-        expect(client.emails.read_by_id(12)).to eq({ 'name' => 'My Email' })
+      it "should take in the email ID" do
+        fake_get "/api/email/version/3/do/read/id/12?format=simple", sample_response
+        expect(client.emails.read_by_id(12)).to eq({"name" => "My Email"})
         assert_authorization_header auth_manager
       end
 
-      it 'should request stats for an email' do
+      it "should request stats for an email" do
         sample_stats_response = %(<?xml version="1.0" encoding="UTF-8"?>\n<rsp stat="ok" version="1.0">
           <stats>
             <sent>100</sent>
@@ -30,20 +30,20 @@ describe Pardot::Objects::Emails do
             <total_clicks>9</total_clicks>
           </stats>
         </rsp>)
-        fake_get '/api/email/version/3/do/stats/id/12?format=simple', sample_stats_response
-        expect(client.emails.stats_by_id(12)).to eq({ 'sent' => '100', 'opens' => '42', 'unique_opens' => '37', 'total_clicks' => '9' })
+        fake_get "/api/email/version/3/do/stats/id/12?format=simple", sample_stats_response
+        expect(client.emails.stats_by_id(12)).to eq({"sent" => "100", "opens" => "42", "unique_opens" => "37", "total_clicks" => "9"})
         assert_authorization_header auth_manager
       end
 
-      it 'should send to a prospect' do
-        fake_post '/api/email/version/3/do/send/prospect_id/42?campaign_id=765&email_template_id=86&format=simple', sample_response
-        expect(client.emails.send_to_prospect(42, campaign_id: 765, email_template_id: 86)).to eq({ 'name' => 'My Email' })
+      it "should send to a prospect" do
+        fake_post "/api/email/version/3/do/send/prospect_id/42?campaign_id=765&email_template_id=86&format=simple", sample_response
+        expect(client.emails.send_to_prospect(42, campaign_id: 765, email_template_id: 86)).to eq({"name" => "My Email"})
         assert_authorization_header auth_manager
       end
 
-      it 'should send to a list' do
-        fake_post '/api/email/version/3/do/send?email_template_id=200&list_ids%5B%5D=235&campaign_id=654&format=simple', sample_response
-        expect(client.emails.send_to_list(:email_template_id => 200, 'list_ids[]' => 235, :campaign_id => 654)).to eq({ 'name' => 'My Email' })
+      it "should send to a list" do
+        fake_post "/api/email/version/3/do/send?email_template_id=200&list_ids%5B%5D=235&campaign_id=654&format=simple", sample_response
+        expect(client.emails.send_to_list(:email_template_id => 200, "list_ids[]" => 235, :campaign_id => 654)).to eq({"name" => "My Email"})
         assert_authorization_header auth_manager
       end
     end

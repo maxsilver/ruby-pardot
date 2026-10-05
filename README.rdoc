@@ -16,7 +16,7 @@ Add the following to your Gemfile
 === Authentication
 
 In order to use this client, an access token retrieved from Salesforce OAuth must be specified. See
-the [authetication documentation on developer.pardot.com](https://developer.pardot.com/kb/authentication/) for more information.
+the [authentication documentation on developer.pardot.com](https://developer.pardot.com/kb/authentication/) for more information.
 
   require "ruby-pardot"
 
@@ -49,7 +49,7 @@ The available objects are:
 
 http://developer.pardot.com/kb/api-version-3/querying-prospects
 
-Most objects accept limit, offset, sort_by, and sord_order parameters
+Most objects accept limit, offset, sort_by, and sort_order parameters
 
   prospects = client.prospects.query(:assigned => false, :sort_by => "last_activity_at", :limit => 20)
 

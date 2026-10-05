@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pardot
   module Objects
     module ListMemberships
@@ -11,8 +13,8 @@ module Pardot
         end
 
         def query(params)
-          result = get '/do/query', params, 'result'
-          result['total_results'] = result['total_results'].to_i if result['total_results']
+          result = get "/do/query", params, "result"
+          result["total_results"] = result["total_results"].to_i if result["total_results"]
           result
         end
 
@@ -20,22 +22,21 @@ module Pardot
           get "/do/read/id/#{id}", params
         end
 
-        def create list_id, prospect_id, params = {}
+        def create(list_id, prospect_id, params = {})
           post "/do/create/list_id/#{list_id}/prospect_id/#{prospect_id}", params
         end
 
         protected
 
-        def get(path, params = {}, result = 'listMembership')
-          response = @client.get 'listMembership', path, params
+        def get(path, params = {}, result = "listMembership")
+          response = @client.get "listMembership", path, params
           result ? response[result] : response
         end
 
-        def post path, params = {}, result = "listMembership"
+        def post(path, params = {}, result = "listMembership")
           response = @client.post "listMembership", path, params
           result ? response[result] : response
         end
-
       end
     end
   end
