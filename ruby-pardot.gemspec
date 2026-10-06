@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   }
 
   s.add_dependency "crack", "~> 0.4.5"
-  s.add_dependency "httparty", "~> 0.21.0"
+  s.add_dependency "httparty", "~> 0.24.0"
 
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "fakeweb", "~> 1.3.0"
